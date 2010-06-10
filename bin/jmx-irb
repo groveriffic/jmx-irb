@@ -1,0 +1,7 @@
+#!/usr/bin/env jruby
+
+require 'java'
+require 'jmx4r'
+require 'jmx-irb'
+
+JMXIRB::Session.new(:url => ARGV[0])
