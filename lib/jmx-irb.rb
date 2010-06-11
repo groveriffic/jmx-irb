@@ -61,6 +61,7 @@ module JMXIRB
 
     class Session
         def initialize(args={})
+            @prompt = args[:host] && "#{args[:host]}:#{args[:port]} > " || "#{args[:url]} > "
             JMX::MBean.establish_connection(args)
             contexts = JMX::MBean.find_all_by_name('org.jruby.jmx-irb:type=*')
             if contexts.size == 0 then
@@ -77,10 +78,10 @@ module JMXIRB
         private
 
         def main
-            while code = STDIN.gets
+            while STDOUT.write(@prompt) and code = STDIN.gets
                 break if code =~ /^exit\s*$/
                 result = evaluate(code)
-                puts result
+                STDOUT.puts '=> ' + result
             end
         end
 

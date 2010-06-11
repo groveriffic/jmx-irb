@@ -2,7 +2,48 @@
 
 require 'java'
 require 'rubygems'
+require 'optparse'
 require 'jmx4r'
 require 'jmx-irb'
 
-JMXIRB::Session.new(:url => ARGV[0], :username => ARGV[1], :password => ARGV[2])
+options = {}
+OptionParser.new do |opts|
+    opts.banner = %|
+Interactive JRuby Console over JMX
+
+Usage:
+    jmx-irb [options]
+    |
+    opts.on('--url URL', String) do |opt|
+        options[:url] = opt
+    end
+
+    opts.on('--username USERNAME', String) do |opt|
+        options[:username] = opt
+    end
+
+    opts.on('--password PASSWORD', String) do |opt|
+        options[:password] = opt
+    end
+
+    opts.on('--host HOST', String) do |opt|
+        options[:host] = opt
+    end
+
+    opts.on('--port PORT', Integer) do |opt|
+        options[:port] = opt
+    end
+
+    opts.on("-h", "--help","Show this.") { puts opts;exit }
+
+end.parse!
+
+%w|username password host port|.each do |opt|
+    next if opt == 'host' and options[:url]
+    next if opt == 'port' and options[:url]
+    next if options[opt.to_sym]
+    puts "Enter #{opt}:"
+    options[opt.to_sym] = STDIN.gets.chomp
+end
+
+JMXIRB::Session.new(options)

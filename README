@@ -1,0 +1,18 @@
+
+Usage:
+# Anywhere in the initialization of your app
+# e.g config/environment.rb if it's a rails app
+require 'rubygems'
+require 'jmx-irb'
+JMXIRB.enable
+
+Your application must be running in a JVM that has JMX enabled
+E.g. Glassfish
+Then run jmx-irb command from your favorite shell
+it will prompt for everything it needs to connect
+You can also run jmx-irb --help for more info.
+
+TODO:
+- More customizable prompt
+- Ability to do multiline blocks
+- Tab Completion
