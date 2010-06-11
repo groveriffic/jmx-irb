@@ -9,7 +9,7 @@ module JMXIRB
         returns :string
 
         def initialize(name = 'DefaultEvalContext', binding = $jmx_irb_eval_binding)
-            super
+            super()
             @name = name
             @binding = binding
             @obj_name = javax.management.ObjectName.new('org.jruby.jmx-irb', 'type', name)

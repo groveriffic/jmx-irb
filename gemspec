@@ -5,4 +5,5 @@ spec = Gem::Specification.new do |s|
     s.author = 'Sam Ehlers'
     s.require_paths = ['lib']
     s.files = Dir['lib/**/*.rb'] + Dir['bin/**/*.rb']
+    s.executables = ['jmx-irb']
 end

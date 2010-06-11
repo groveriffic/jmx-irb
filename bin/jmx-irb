@@ -1,6 +1,7 @@
 #!/usr/bin/env jruby
 
 require 'java'
+require 'rubygems'
 require 'jmx4r'
 require 'jmx-irb'
 
